@@ -1,0 +1,14 @@
+---
+// Image with a shimmer skeleton until it loads. `src` is the base path without the size suffix.
+interface Props {
+  src: string; alt: string; widths?: number[]; sizes?: string;
+  class?: string; imgClass?: string; style?: string; imgStyle?: string; eager?: boolean; plain?: boolean;
+}
+const { src, alt, widths = [800, 1600], sizes = '(max-width: 900px) 100vw, 50vw', class: cls = '', imgClass = '', style, imgStyle, eager = false, plain = false } = Astro.props;
+const srcset = plain ? undefined : widths.map((w) => `${src}-${w}.webp ${w}w`).join(', ');
+const fallback = plain ? `${src}.webp` : `${src}-${widths[0]}.webp`;
+---
+<div class:list={['sk', cls]} style={style}>
+  <img src={fallback} srcset={srcset} sizes={plain ? undefined : sizes} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async"
+    fetchpriority={eager ? 'high' : undefined} class:list={['block h-full w-full object-cover', imgClass]} style={imgStyle} />
+</div>

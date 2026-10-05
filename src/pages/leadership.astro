@@ -1,0 +1,64 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Pic from '../components/Pic.astro';
+import Hire from '../components/Hire.astro';
+import LeadershipMedia from '../components/islands/LeadershipMedia';
+import { leadership } from '../data/site';
+const steps = [
+  { when: '2021', t: 'Co founder', d: 'Wrote the constitution the society runs on, and helped build its website.' },
+  { when: '[YEAR]', t: 'Vice President', d: '[ONE LINE ON WHAT YOU DID AS VICE PRESIDENT]' },
+  { when: '2022 to 2023', t: 'President', d: 'Ran welfare and coordination for 700+ scholars from 35+ countries.' },
+];
+const record = [
+  { img: '/images/summit', t: 'Summit 1.0 and Orientation', when: '27 Jan 2023 · BR Auditorium, DTU', d: 'Theme: Embracing International Cultural Diversity.' },
+  { img: '/images/interview', t: 'Interview as President, DTU-ISS 22 to 23', when: 'DTU Studio', d: '' },
+  { img: '/images/iccr', t: 'Honoured at the ICCR Exit Engagement Evening', when: '12 Jun 2023 · University of Delhi', d: '' },
+  { img: '/images/vice-chancellor', t: 'Meeting the Vice Chancellor', when: 'Delhi Technological University', d: '' },
+];
+---
+<Base title="Leadership" active="leadership" description="Oluwaferanmi Iyiola co founded the DTU International Students' Society in 2021, wrote its constitution and led 700+ scholars from 35+ countries as President.">
+  <PageIntro title="When something has no structure, I write one and run it." lead="Community building at Delhi Technological University, 2021 to 2023." />
+  <section class="pb-12">
+    <div class="wrap" data-reveal="scale">
+      <div class="relative overflow-hidden rounded-[22px]" style="aspect-ratio:21/8">
+        <Pic src="/images/lamp" alt="Lighting the ceremonial lamp at a society event" class="absolute inset-0" imgStyle="object-position:center 35%" sizes="100vw" eager />
+        <div class="ui absolute inset-x-0 bottom-0 px-8 py-6 text-[15px] text-white" style="background:linear-gradient(to top,rgba(0,0,0,.65),rgba(0,0,0,0))">Lighting the lamp to open [WHICH EVENT]</div>
+      </div>
+    </div>
+  </section>
+  <section class="section" style="background:var(--surface)">
+    <div class="wrap grid gap-14 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
+      <div data-reveal="left">
+        <div class="ui muted text-sm">Delhi Technological University</div>
+        <h2 class="h2 mt-2">DTU International Students' Society</h2>
+        <p class="lead">A home for 700+ international scholars from 35+ countries. I helped found it, wrote its constitution, then led it.</p>
+        <div class="mt-7"><LeadershipMedia client:visible videos={leadership.videos} /></div>
+      </div>
+      <ol class="m-0 list-none p-0" data-stagger>
+        {steps.map((s, i) => (
+          <li class="flex gap-6 pb-10">
+            <span class="flex flex-none flex-col items-center"><span class="mt-2 h-3.5 w-3.5 rounded-full" style={`background:${i === steps.length - 1 ? 'var(--accent)' : 'var(--muted)'}`}></span><span class="mt-2 w-0.5 flex-1" style="background:var(--line)"></span></span>
+            <span><span class="ui muted block text-[13px]">{s.when}</span><span class="display mt-1 block text-[28px]">{s.t}</span><span class="mt-1.5 block max-w-[560px] text-base leading-relaxed" style="color:var(--text)">{s.d}</span></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+  <section class="section studio" style="background:#131d27;color:#fff">
+    <div class="wrap">
+      <h2 class="h2" data-reveal>On the record</h2>
+      <p class="mt-3.5 max-w-[620px] text-[17px]" style="color:rgba(255,255,255,.7)" data-reveal>Speeches, an interview and the people I met as President.</p>
+      <div class="mt-10 grid gap-5 md:grid-cols-2" data-stagger>
+        {record.map((r) => (
+          <article class="overflow-hidden rounded-[18px]" style="background:rgba(255,255,255,.05)">
+            <Pic src={r.img} widths={[800, 1400]} alt={r.t} style="aspect-ratio:16/9" imgStyle="object-position:center 30%" />
+            <div class="px-6 py-5"><div class="ui text-[13px]" style="color:rgba(255,255,255,.55)">{r.when}</div><h3 class="display m-0 mt-1 text-2xl">{r.t}</h3>{r.d && <p class="m-0 mt-1 text-[15px]" style="color:rgba(255,255,255,.7)">{r.d}</p>}</div>
+          </article>
+        ))}
+      </div>
+      <button type="button" class="btn btn-paper mt-8" onclick="window.dispatchEvent(new Event('open-videos'))">Watch speeches and interview</button>
+    </div>
+  </section>
+  <Hire />
+</Base>

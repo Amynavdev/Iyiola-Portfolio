@@ -1,0 +1,50 @@
+---
+// No backend yet: the form composes an email in the visitor's own mail app, and says so.
+import { site } from '../data/site';
+---
+<section id="contact-form" class="section">
+  <div class="wrap grid gap-12 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
+    <div data-reveal="left">
+      <h2 class="h2">Write to me.</h2>
+      <p class="lead">A role, a project, a stage or a cause. I reply within a day.</p>
+      <div class="ui muted mt-6 text-sm">Or email <a href={`mailto:${site.email}`} style="color:var(--accent)">{site.email}</a></div>
+    </div>
+    <form class="card grid gap-4 p-8 max-[900px]:p-5" data-reveal="right" data-mailto={site.email} novalidate>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <label class="grid gap-2"><span class="ui text-[13px]">Your name</span><input name="name" required autocomplete="name" class="field" /></label>
+        <label class="grid gap-2"><span class="ui text-[13px]">Your email</span><input name="email" type="email" required autocomplete="email" class="field" /></label>
+      </div>
+      <fieldset class="m-0 border-0 p-0">
+        <legend class="ui mb-2 text-[13px]">What is it about?</legend>
+        <div class="flex flex-wrap gap-2">
+          {['Embedded role', 'Software role', 'A project', 'Something else'].map((t, i) => (
+            <label class="topic"><input type="radio" name="topic" value={t} checked={i === 0} /><span>{t}</span></label>
+          ))}
+        </div>
+      </fieldset>
+      <label class="grid gap-2"><span class="ui text-[13px]">Message</span><textarea name="message" rows="5" required class="field"></textarea></label>
+      <div class="flex flex-wrap items-center gap-4">
+        <button type="submit" class="btn btn-primary">Send message</button>
+        <span class="ui muted text-xs" data-note>Opens your email app with the message ready.</span>
+      </div>
+    </form>
+  </div>
+</section>
+<script>
+  document.querySelectorAll<HTMLFormElement>('form[data-mailto]').forEach((f) => f.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!f.reportValidity()) return;
+    const d = new FormData(f);
+    const subject = `${d.get('topic')} · from ${d.get('name')}`;
+    const body = `${d.get('message')}\n\n${d.get('name')}\n${d.get('email')}`;
+    window.location.href = `mailto:${f.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  }));
+</script>
+<style>
+  .field { width: 100%; box-sizing: border-box; min-height: 48px; border: 0; border-radius: 14px; background: var(--ash); color: var(--ink); padding: 12px 16px; font: 15px var(--font-body); resize: vertical; }
+  .field:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .topic input { position: absolute; opacity: 0; pointer-events: none; }
+  .topic span { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-radius: 999px; background: var(--ash); font-family: var(--font-ui); font-weight: 700; font-size: 14px; cursor: pointer; }
+  .topic input:checked + span { background: var(--accent); color: #fff; }
+  .topic input:focus-visible + span { outline: 2px solid var(--accent-2); outline-offset: 2px; }
+</style>

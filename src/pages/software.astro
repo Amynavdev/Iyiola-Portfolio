@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import Hire from '../components/Hire.astro';
+import CodeTyper from '../components/islands/CodeTyper';
+import { elastik, projects, clientSites } from '../data/site';
+const nodes = [
+  { t: 'WhatsApp Business', s: 'OAuth, templates, webhooks', x: '6%', y: '10%' },
+  { t: 'QuickBooks Online', s: 'OAuth2, ETL, scheduled sync', x: '62%', y: '10%' },
+  { t: 'elastik-medik', s: 'Clinical workflows', x: '2%', y: '44%' },
+  { t: 'AI Reports', s: 'FastAPI, SSO', x: '70%', y: '44%' },
+  { t: 'Print Engine V2', s: '40+ templates into one', x: '8%', y: '78%' },
+  { t: 'Serial Numbers', s: '150+ files, stock flows', x: '64%', y: '78%' },
+];
+const own = projects.filter((p) => p.where === 'My product');
+const clients = projects.filter((p) => p.where.startsWith('Client'));
+---
+<Base title="Software" active="software" description="Software by Oluwaferanmi Iyiola: contributions to the Elastik ERP at VGR Solutions, his own products AmyNav, Tailor on the Go and PropertyTrack, and client builds.">
+  <PageIntro title="Software" lead="Systems real businesses run on. PHP and Python at the core, React and Astro on top.">
+    <div class="mt-7 flex flex-wrap gap-2" data-stagger>
+      {['PHP', 'Python, FastAPI', 'MySQL', 'React, Astro', 'WordPress', 'Socket.IO'].map((c) => <span class="chip">{c}</span>)}
+    </div>
+  </PageIntro>
+
+  <section id="elastik" class="section studio" style="background:#131d27;color:#fff">
+    <div class="wrap">
+      <div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div data-reveal="left">
+          <div class="ui text-sm" style="color:rgba(255,255,255,.55)">Sep 2023 to now · VGR Solutions, Port Louis</div>
+          <h2 class="h2 mt-2">Elastik, the ERP I contribute to</h2>
+          <p class="mt-4 text-[17px] leading-relaxed" style="color:rgba(255,255,255,.72)">Elastik is VGR Solutions' multi tenant ERP, CRM and CMS, built long before I joined. Across 12+ repositories and 1,000+ tickets, I have been trusted with features that cut across the whole product.</p>
+        </div>
+        <div class="relative hidden h-[420px] overflow-hidden rounded-[18px] lg:block" style="background:rgba(255,255,255,.04)" data-reveal="right">
+          <svg width="100%" height="100%" viewBox="0 0 700 420" preserveAspectRatio="none" class="absolute inset-0" aria-hidden="true">
+            <g stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><path d="M350 210 L140 70"/><path d="M350 210 L560 70"/><path d="M350 210 L100 210"/><path d="M350 210 L600 210"/><path d="M350 210 L150 350"/><path d="M350 210 L550 350"/></g>
+          </svg>
+          <div class="ui absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl px-6 py-5 text-center text-[15px]" style="background:var(--accent)">Integration Management<div class="mt-0.5 text-xs font-normal opacity-80">Shipped in 7 apps</div></div>
+          {nodes.map((n) => <div class="ui absolute rounded-2xl px-4 py-3 text-sm" style={`left:${n.x};top:${n.y};background:#1f2a36`}>{n.t}<div class="text-xs font-normal opacity-60">{n.s}</div></div>)}
+        </div>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-2" data-stagger>
+        {elastik.map((f) => (
+          <div class="rounded-[18px] p-7" style="background:rgba(255,255,255,.05)">
+            <div class="display text-2xl">{f.t}</div>
+            <p class="m-0 mt-2.5 text-[15px] leading-relaxed" style="color:rgba(255,255,255,.68)">{f.d}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-6 grid items-center gap-8 rounded-[18px] p-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]" style="background:rgba(31,111,209,.16)" data-reveal>
+        <div>
+          <div class="ui text-base">From the field: a production bug, traced to the root</div>
+          <p class="m-0 mt-2 text-[15px] leading-relaxed" style="color:rgba(255,255,255,.72)">Tenants could finish WhatsApp onboarding while their credentials silently failed to save. I tested my first theory against real production SQL, dropped it when the data disagreed, found a non atomic dual database commit, then shipped a live fix and a transactional repair script.</p>
+        </div>
+        <CodeTyper client:visible />
+      </div>
+    </div>
+  </section>
+
+  <section id="products" class="section">
+    <div class="wrap">
+      <h2 class="h2" data-reveal>Built by me</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4" data-stagger>
+        {own.map((p) => (
+          <article class="card flex min-h-[240px] flex-col gap-3 p-7">
+            <span class="ui text-xs" style="color:var(--accent)">{p.where}</span>
+            <h3 class="display m-0 text-[26px] leading-tight">{p.t}</h3>
+            <p class="m-0 flex-1 text-[15px] leading-relaxed" style="color:var(--text)">{p.d}</p>
+            <span class="ui text-[13px]">{p.stack}</span>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="clients" class="section" style="background:var(--surface)">
+    <div class="wrap">
+      <h2 class="h2" data-reveal>Clients</h2>
+      <div class="mt-8 grid gap-5 md:grid-cols-2" data-stagger>
+        {clients.map((p) => (
+          <article class="flex flex-col gap-3 rounded-[18px] p-7" style="background:var(--bg)">
+            <span class="ui muted text-xs">{p.where}</span>
+            <h3 class="display m-0 text-[26px]">{p.t}</h3>
+            <p class="m-0 text-[15px] leading-relaxed" style="color:var(--text)">{p.d}</p>
+            <span class="ui text-[13px]">{p.stack}</span>
+          </article>
+        ))}
+      </div>
+      <p class="lead mt-8" data-reveal>Through my agency, thegossipears, since 2017: {clientSites.join(', ')} and more, for clients in Nigeria, the UK, the USA and India.</p>
+    </div>
+  </section>
+  <Hire />
+</Base>

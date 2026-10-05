@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://iyiolaoluwaferanmi.com/sitemap-index.xml

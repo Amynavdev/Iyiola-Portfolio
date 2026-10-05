@@ -1,0 +1,23 @@
+---
+import { site } from '../data/site';
+const bars = Array.from({ length: 60 }, (_, i) => ({ h: 14 + Math.round(Math.abs(Math.sin(i * 0.5)) * 28), on: i < 22, dur: (0.9 + (i % 5) * 0.17).toFixed(2), del: (-(i % 7) * 0.13).toFixed(2) }));
+---
+<section class="studio" style="background:#1b1a20;color:#fff;padding:36px 0">
+  <div class="wrap flex items-center gap-8 max-[900px]:flex-wrap max-[900px]:gap-4" data-reveal>
+    <img src="/images/guitar-400.webp" alt="Playing electric guitar on stage" width="86" height="86" loading="lazy" class="h-[86px] w-[86px] flex-none rounded-2xl object-cover max-[900px]:h-[72px] max-[900px]:w-[72px]" />
+    <div class="flex-none">
+      <div class="ui text-[13px]" style="color:rgba(255,255,255,.5)">Off the clock</div>
+      <div class="display text-[32px] leading-tight max-[900px]:text-[22px]">I also play guitar.</div>
+    </div>
+    <div class="flex min-w-0 flex-1 items-center gap-4 rounded-full py-2.5 pl-2.5 pr-6 max-[900px]:basis-full" style="background:rgba(255,255,255,.05)">
+      <a href={site.links.audiomack} aria-label="Play Oluorun on Audiomack" class="flex h-[52px] w-[52px] flex-none items-center justify-center rounded-full" style="background:#fff">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+      </a>
+      <div class="flex-none"><div class="display text-[22px] leading-none">Oluorun</div><div class="text-[13px]" style="color:rgba(255,255,255,.55)">God of Heaven</div></div>
+      <div class="flex h-11 min-w-0 flex-1 items-center gap-[3px] overflow-hidden" aria-hidden="true">
+        {bars.map((b) => <span class="min-w-[2px] flex-1 rounded-sm" style={`height:${b.h}px;background:${b.on ? '#fff' : 'rgba(255,255,255,.28)'};animation:bar ${b.dur}s ease-in-out infinite;animation-delay:${b.del}s`} />)}
+      </div>
+    </div>
+    <a class="btn btn-glass flex-none max-[900px]:hidden" href="/music/">More music</a>
+  </div>
+</section>

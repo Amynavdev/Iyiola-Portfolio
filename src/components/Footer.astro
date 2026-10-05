@@ -1,0 +1,24 @@
+---
+import { nav, site } from '../data/site';
+---
+<footer class="site-footer">
+  <div class="wrap flex flex-wrap items-center justify-between gap-5 py-7">
+    <a href="/" class="flex items-center gap-3 no-underline" style="color:inherit" aria-label="Home">
+      <span class="logo">OI</span>
+      <span class="ui text-sm">{site.name}</span>
+    </a>
+    <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
+      {nav.map((n) => <a href={n.href} class="ui text-[13px] no-underline" style="color:var(--muted)">{n.label}</a>)}
+    </nav>
+    <div class="flex items-center gap-4">
+      <a href={site.links.linkedin} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">LinkedIn</a>
+      <a href={site.links.github} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">GitHub</a>
+      <a href={site.links.audiomack} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">Audiomack</a>
+    </div>
+  </div>
+  <div class="wrap ui pb-7 text-xs max-[1000px]:pb-28" style="color:var(--muted)">© {new Date().getFullYear()} {site.fullName} · {site.location}</div>
+</footer>
+<style>
+  .site-footer { background: var(--surface); border-top: 1px solid var(--line); color: var(--ink); }
+  .logo { width: 34px; height: 34px; border-radius: 11px; background: var(--ink); color: var(--bg); display: inline-flex; align-items: center; justify-content: center; font-family: var(--font-display); font-weight: 700; font-size: 15px; }
+</style>

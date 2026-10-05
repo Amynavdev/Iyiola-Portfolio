@@ -1,0 +1,33 @@
+---
+import Base from '../layouts/Base.astro';
+import Pic from '../components/Pic.astro';
+import { site } from '../data/site';
+const bars = Array.from({ length: 60 }, (_, i) => ({ h: 18 + Math.round(Math.abs(Math.sin(i * 0.55) * 26 + Math.sin(i * 1.7) * 12)), on: i < 22, dur: (0.9 + (i % 5) * 0.17).toFixed(2), del: (-(i % 7) * 0.13).toFixed(2) }));
+---
+<Base title="Music" active="music" tone="dark" description="Oluwaferanmi Iyiola plays electric guitar. His single Oluorun (God of Heaven) is out on Audiomack as iyiolastrings.">
+  <section class="studio" style="background:#17161c;color:#fff;padding:150px 0 80px">
+    <div class="wrap grid items-center gap-14 lg:grid-cols-2 max-[900px]:gap-8">
+      <div data-reveal="left">
+        <h1 class="display m-0" style="font-size:clamp(42px,5vw,72px);line-height:1.03">Music</h1>
+        <p class="mt-4 max-w-[520px] text-lg leading-relaxed" style="color:rgba(255,255,255,.72)">Guitarist. My single Oluorun, God of Heaven, is out now.</p>
+        <div class="mt-8 rounded-[22px] p-7" style="background:rgba(255,255,255,.05)">
+          <div class="flex items-center gap-5">
+            <div class="ui flex h-28 w-28 flex-none items-center justify-center rounded-[14px] text-center text-[11px]" style="background:#2c2b33;color:rgba(255,255,255,.45)">[OLUORUN COVER]</div>
+            <div><div class="ui text-[13px]" style="color:rgba(255,255,255,.55)">Single · iyiolastrings</div><div class="display text-[34px] leading-tight">Oluorun</div><div class="text-sm" style="color:rgba(255,255,255,.6)">God of Heaven</div></div>
+          </div>
+          <div class="mt-6 flex items-center gap-4">
+            <a href={site.links.audiomack} aria-label="Play Oluorun on Audiomack" class="flex h-14 w-14 flex-none items-center justify-center rounded-full" style="background:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></a>
+            <div class="flex h-14 min-w-0 flex-1 items-center gap-[3px] overflow-hidden" aria-hidden="true">
+              {bars.map((b) => <span class="min-w-[2px] flex-1 rounded-sm" style={`height:${Math.min(b.h, 56)}px;background:${b.on ? '#fff' : 'rgba(255,255,255,.25)'};animation:bar ${b.dur}s ease-in-out infinite;animation-delay:${b.del}s`} />)}
+            </div>
+          </div>
+          <a class="btn mt-6" style="background:#fff;color:#131d27" href={site.links.audiomack}>Listen on Audiomack</a>
+        </div>
+      </div>
+      <div data-reveal="right">
+        <Pic src="/images/guitar" widths={[400, 1000]} alt="Playing electric guitar on stage, featured by DTU Times" class="rounded-[22px]" style="aspect-ratio:1080/890" eager />
+        <div class="ui mt-3 text-[13px]" style="color:rgba(255,255,255,.5)">Live on electric guitar · photo by DTU Times</div>
+      </div>
+    </div>
+  </section>
+</Base>

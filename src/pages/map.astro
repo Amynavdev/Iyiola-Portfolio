@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import PageIntro from '../components/PageIntro.astro';
+import ContactForm from '../components/ContactForm.astro';
+import WorldMap from '../components/islands/WorldMap';
+import { places } from '../data/site';
+---
+<Base title="Where I've worked" active="map" tone="dark" description="Where Oluwaferanmi Iyiola has studied and worked: Port Louis, New Delhi, and clients in the USA, the UK and Nigeria.">
+  <PageIntro title="One desk, clients worldwide." lead="Where I studied, where I work, and who I build for remotely. Tap a place." dark />
+  <section class="studio pb-20" style="background:var(--studio);color:#f4f1ea">
+    <div class="wrap" data-reveal><WorldMap client:visible places={places} full /></div>
+  </section>
+  <ContactForm />
+</Base>

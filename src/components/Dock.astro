@@ -1,0 +1,69 @@
+---
+// Phone navigation: a small floating dock instead of a full screen menu.
+interface Props { active?: string }
+const { active } = Astro.props;
+const items = [
+  { key: 'electronics', href: '/electronics/', label: 'Electronics', d: 'M7 7h10v10H7zM10 3v4M14 3v4M10 17v4M14 17v4M3 10h4M3 14h4M17 10h4M17 14h4' },
+  { key: 'software', href: '/software/', label: 'Software', d: 'M8 7l-5 5 5 5M16 7l5 5-5 5' },
+  { key: 'leadership', href: '/leadership/', label: 'Leadership', d: 'M16 20v-2a4 4 0 0 0-8 0v2M12 11a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM22 20v-2a3 3 0 0 0-3-3M2 20v-2a3 3 0 0 1 3-3' },
+  { key: 'music', href: '/music/', label: 'Music', d: 'M9 18V5l11-2v13M9 18a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM20 16a3 3 0 1 1-6 0 3 3 0 0 1 6 0z' },
+  { key: 'map', href: '/map/', label: 'Map', d: 'M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11zM12 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z' },
+];
+---
+<nav aria-label="Sections" class="dock">
+  <div class="dock-in">
+    {items.map((i) => (
+      <a href={i.href} aria-label={i.label} class:list={['di', active === i.key && 'on']}>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d={i.d} /></svg>
+      </a>
+    ))}
+    <button type="button" class="di more" aria-label="More" aria-expanded="false" data-more>
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M5 12h.01M12 12h.01M19 12h.01" /></svg>
+    </button>
+  </div>
+  <div class="sheet" data-sheet hidden>
+    <div class="scrim" data-close></div>
+    <div class="panel" role="dialog" aria-label="More">
+      <span class="grab"></span>
+      <a class="r" href="/about/">About me</a>
+      <a class="r" href="/about/#cv">Download CV</a>
+      <a class="r" href="mailto:iyolastrings@gmail.com">Email me</a>
+      <button type="button" class="r" data-theme-toggle>Light or dark mode</button>
+      <div class="soc">
+        <a href="https://www.linkedin.com/in/oluwaferanmi-iyiola-8a07a415b/">LinkedIn</a>
+        <a href="https://github.com/IYIOLASTRINGS">GitHub</a>
+        <a href="https://audiomack.com/iyiolastrings/song/oluorun">Audiomack</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  const btn = document.querySelector<HTMLButtonElement>('[data-more]');
+  const sheet = document.querySelector<HTMLElement>('[data-sheet]');
+  const set = (open: boolean) => { if (!sheet || !btn) return; sheet.hidden = !open; btn.setAttribute('aria-expanded', String(open)); };
+  btn?.addEventListener('click', () => set(!!sheet?.hidden));
+  sheet?.querySelector('[data-close]')?.addEventListener('click', () => set(false));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(false); });
+</script>
+
+<style>
+  .dock { display: none; }
+  @media (max-width: 1000px) {
+    .dock { display: block; position: fixed; left: 0; right: 0; bottom: 14px; z-index: 50; pointer-events: none; }
+    .dock-in { pointer-events: auto; margin: 0 auto; width: max-content; display: flex; gap: 2px; padding: 6px; border-radius: 999px; background: rgba(255, 255, 255, 0.96); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); box-shadow: 0 14px 34px rgba(19, 29, 39, 0.25); }
+    :global([data-theme="dark"]) .dock-in { background: rgba(29, 28, 35, 0.94); }
+    .di { width: 46px; height: 46px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: #131d27; border: 0; background: transparent; cursor: pointer; }
+    :global([data-theme="dark"]) .di { color: #f4f1ea; }
+    .di.on { background: #131d27; color: #fff; }
+    .di.more { background: var(--accent); color: #fff; }
+    .sheet { position: fixed; inset: 0; pointer-events: auto; }
+    .scrim { position: absolute; inset: 0; background: rgba(10, 10, 14, 0.55); }
+    .panel { position: absolute; left: 8px; right: 8px; bottom: 8px; background: var(--surface); color: var(--ink); border-radius: 24px; padding: 10px 18px 18px; box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.3); animation: up 0.35s cubic-bezier(0.2, 0.8, 0.2, 1); }
+    .grab { display: block; width: 40px; height: 5px; border-radius: 3px; background: var(--line); margin: 4px auto 10px; }
+    .r { display: flex; align-items: center; width: 100%; min-height: 54px; border: 0; border-bottom: 1px solid var(--line); background: none; color: var(--ink); text-decoration: none; font-family: var(--font-ui); font-weight: 700; font-size: 16px; text-align: left; cursor: pointer; padding: 0; }
+    .soc { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
+    .soc a { min-height: 46px; border-radius: 999px; background: var(--ash); color: var(--ink); display: flex; align-items: center; justify-content: center; font-family: var(--font-ui); font-weight: 700; font-size: 14px; text-decoration: none; }
+  }
+  @keyframes up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+</style>

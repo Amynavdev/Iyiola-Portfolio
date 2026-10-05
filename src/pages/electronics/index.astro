@@ -1,0 +1,67 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageIntro from '../../components/PageIntro.astro';
+import Pic from '../../components/Pic.astro';
+import Hire from '../../components/Hire.astro';
+import BuildPlayer from '../../components/islands/BuildPlayer';
+import { builds, silicon, toolkit } from '../../data/site';
+const modules = [
+  ['Ultrasonic sensor', 'Finds objects ahead and avoids obstacles'],
+  ['Robotic car', 'Drives the robot to the waste'],
+  ['Robotic arm', 'Picks the item up'],
+  ['Classification and sorting', 'EfficientNet-D2, 82.3% accuracy, on the Pi'],
+  ['Pressure sensor', 'Tests the item before it is sorted'],
+];
+---
+<Base title="Electronics" active="electronics" tone="dark" description="Hardware by Oluwaferanmi Iyiola: the EIRT e-waste robot (IEEE ICCCNT 2023), sensors, microcontrollers and chip design.">
+  <PageIntro title="The lab" lead="Hardware I designed, wired and coded during my engineering degree at DTU. Real builds, filmed on the bench." dark>
+    <div class="ui mt-3 text-[13px]" style="color:rgba(244,241,234,.5)">BTech, Electrical, Electronics and Communications · First Division</div>
+    <div class="mt-6 flex flex-wrap gap-2">{toolkit.hardware.map((t) => <span class="chip" style="background:rgba(255,255,255,.08);color:#fff">{t}</span>)}</div>
+  </PageIntro>
+  <section class="studio pb-16" style="background:var(--studio);color:#f4f1ea">
+    <div class="wrap" data-reveal><BuildPlayer client:visible builds={builds} detail /></div>
+  </section>
+
+  <section class="section">
+    <div class="wrap grid items-center gap-14 lg:grid-cols-2">
+      <div data-reveal="left">
+        <div class="ui muted text-sm">Final year project · Sep 2022 to May 2023</div>
+        <h2 class="h2 mt-2">EIRT: a robot that hunts e-waste</h2>
+        <p class="lead">E-Waste Intelligent Robotic Technology finds electronic waste, picks it up, classifies it with a deep learning model and sorts it. Everything runs on one Raspberry Pi on board.</p>
+        <div class="mt-7 flex flex-wrap gap-3">
+          <a class="btn btn-ink" href="/electronics/eirt/">Explore the robot</a>
+          <a class="btn btn-ash" href="/electronics/eirt/#result">IEEE paper</a>
+        </div>
+      </div>
+      <ol class="m-0 grid list-none gap-3 p-0" data-stagger>
+        {modules.map(([t, d], i) => (
+          <li class="card flex items-center gap-5 px-6 py-5">
+            <span class="display w-10 text-[28px]" style="color:var(--accent)">{String(i + 1).padStart(2, '0')}</span>
+            <span><span class="ui block text-base">{t}</span><span class="muted text-sm">{d}</span></span>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--surface)">
+    <div class="wrap">
+      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
+        <div data-reveal="left"><Pic src="/images/eirt-thesis" widths={[700, 1200]} alt="Holding EIRT and the project thesis outside the Electronics and Communications department" class="rounded-[22px]" style="aspect-ratio:4/5" imgStyle="object-position:center 35%" /></div>
+        <div data-reveal="right">
+          <h2 class="h2">Silicon, signals and simulation</h2>
+          <div class="mt-7 grid gap-4 sm:grid-cols-2" data-stagger>
+            {silicon.map((s) => (
+              <div class="flex flex-col gap-2 rounded-[18px] p-6" style="background:var(--bg)">
+                <span class="ui muted text-[13px]">{s.tool}</span>
+                <span class="display text-[23px] leading-tight">{s.t}</span>
+                <span class="text-sm leading-relaxed" style="color:var(--text)">{s.d}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Hire />
+</Base>

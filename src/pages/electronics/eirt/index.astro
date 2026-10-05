@@ -1,0 +1,48 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageIntro from '../../../components/PageIntro.astro';
+import Pic from '../../../components/Pic.astro';
+import Hire from '../../../components/Hire.astro';
+import EirtAnatomy from '../../../components/islands/EirtAnatomy';
+import { eirtParts } from '../../../data/site';
+const meta = [['Role', '[YOUR ROLE ON THE TEAM]'], ['Team', 'Loice and Tursélio'], ['When', 'Sep 2022 to May 2023'], ['Tools', 'Raspberry Pi, SolidWorks, EfficientNet']];
+---
+<Base title="EIRT, an e-waste robot" active="electronics" description="EIRT: a Raspberry Pi robot that finds, classifies and sorts electronic waste. Published at IEEE ICCCNT 2023 with 82.3% accuracy.">
+  <PageIntro title="EIRT, an intelligent robot for e-waste" lead="It finds electronic waste, picks it up, decides what it is and puts it in the right bin." back={{ href: '/electronics/', label: 'Back to the lab' }}>
+    <div class="mt-9 grid gap-6 border-y py-6 sm:grid-cols-2 lg:grid-cols-4" style="border-color:var(--line)" data-stagger>
+      {meta.map(([k, v]) => <div><div class="ui muted text-[13px]">{k}</div><div class="ui mt-1.5 text-base">{v}</div></div>)}
+    </div>
+  </PageIntro>
+  <section class="pb-6">
+    <div class="wrap" data-reveal="scale"><Pic src="/images/eirt-front" alt="The EIRT robot: arm, bins, camera and ultrasonic sensor" class="rounded-[18px]" style="aspect-ratio:21/9" eager sizes="100vw" /></div>
+  </section>
+  <section class="section">
+    <div class="wrap grid gap-16 lg:grid-cols-[240px_minmax(0,1fr)]">
+      <nav aria-label="On this page" class="ui sticky top-28 hidden h-max flex-col gap-3.5 text-sm lg:flex">
+        <a href="#problem" class="no-underline" style="color:var(--accent)">The problem</a>
+        <a href="#how" class="muted no-underline">How it works</a>
+        <a href="#mine" class="muted no-underline">What I built</a>
+        <a href="#result" class="muted no-underline">Result</a>
+      </nav>
+      <div class="max-w-[820px]">
+        <div id="problem" data-reveal><h2 class="h2 text-[34px]">The problem</h2><p class="lead">[TWO OR THREE SENTENCES ON WHY E-WASTE SORTING MATTERS AND WHAT WAS WRONG WITH SORTING BY HAND.]</p></div>
+        <div id="how" class="mt-14" data-reveal>
+          <h2 class="h2 text-[34px]">How it works</h2>
+          <p class="lead mb-5">Everything runs on one Raspberry Pi on the robot: the model, the arm and the motors. No laptop; a monitor was only plugged in over HDMI to watch the output. Tap a part.</p>
+          <EirtAnatomy client:visible parts={eirtParts} />
+        </div>
+        <div id="mine" class="mt-14" data-reveal><h2 class="h2 text-[34px]">What I built</h2><p class="lead">[YOUR PART OF THE BUILD.]</p></div>
+        <div id="result" class="mt-14" data-reveal>
+          <h2 class="h2 text-[34px]">Result</h2>
+          <p class="lead">The EfficientNet-D2 model classified e-waste at 82.3% accuracy. The work was published at IEEE ICCCNT 2023.</p>
+          <Pic src="/images/eirt-thesis" widths={[700, 1200]} alt="Holding EIRT and the project thesis outside the Electronics and Communications department" class="mt-6 rounded-[18px]" style="aspect-ratio:4/3" imgStyle="object-position:center 40%" />
+          <a href="#" class="card mt-5 flex items-center gap-5 p-6 no-underline" style="color:inherit">
+            <span class="flex h-12 w-12 flex-none items-center justify-center rounded-[14px]" style="background:var(--accent-soft)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg></span>
+            <span class="min-w-0 flex-1"><span class="ui block text-base">A Deep Learning Approach for Electronic Waste Detection, Classification, and Sorting</span><span class="muted text-sm">IEEE ICCCNT 2023 · [LINK TO IEEE XPLORE]</span></span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <Hire />
+</Base>
