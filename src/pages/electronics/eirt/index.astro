@@ -14,7 +14,11 @@ const meta = [['Role', '[YOUR ROLE ON THE TEAM]'], ['Team', 'Loice and Tursélio
     </div>
   </PageIntro>
   <section class="pb-6">
-    <div class="wrap" data-reveal="scale"><Pic src="/images/eirt-front" alt="The EIRT robot: arm, bins, camera and ultrasonic sensor" class="rounded-[18px]" style="aspect-ratio:21/9" eager sizes="100vw" /></div>
+    <div class="wrap relative" data-reveal="scale">
+      <Pic src="/images/eirt-front" alt="The EIRT robot: arm, bins, camera and ultrasonic sensor" class="rounded-[18px]" style="aspect-ratio:21/9" eager sizes="100vw" />
+      <span class="absolute left-1/2 top-1/2 flex h-[84px] w-[84px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full" style="background:rgba(255,255,255,.92)" aria-hidden="true"><svg width="28" height="28" viewBox="0 0 24 24" fill="#131d27"><path d="M8 5v14l11-7z"/></svg></span>
+      <span class="ui absolute bottom-[18px] left-[68px] rounded-full px-3.5 py-2 text-[13px] text-white max-[900px]:left-8" style="background:rgba(0,0,0,.45)">Bench footage · video coming soon</span>
+    </div>
   </section>
   <section class="section">
     <div class="wrap grid gap-16 lg:grid-cols-[240px_minmax(0,1fr)]">
@@ -42,6 +46,18 @@ const meta = [['Role', '[YOUR ROLE ON THE TEAM]'], ['Team', 'Loice and Tursélio
           </a>
         </div>
       </div>
+    </div>
+  </section>
+  <section class="pb-16">
+    <div class="wrap grid gap-[22px] md:grid-cols-2" data-stagger>
+      <a href="/electronics/" class="card flex overflow-hidden no-underline" style="color:inherit">
+        <img src="/images/traffic.webp" alt="Four way traffic light build" loading="lazy" class="w-[180px] flex-none object-cover max-[600px]:w-[120px]" />
+        <span class="p-6"><span class="ui muted block text-[13px]">Previous</span><span class="display mt-1.5 block text-2xl">Four way traffic light</span></span>
+      </a>
+      <a href="/electronics/" class="card flex justify-between overflow-hidden no-underline" style="color:inherit">
+        <span class="p-6"><span class="ui muted block text-[13px]">Next</span><span class="display mt-1.5 block text-2xl">Automatic street light</span></span>
+        <img src="/images/street.webp" alt="Automatic street light build" loading="lazy" class="w-[180px] flex-none object-cover max-[600px]:w-[120px]" />
+      </a>
     </div>
   </section>
   <Hire />

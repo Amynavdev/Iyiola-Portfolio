@@ -1,92 +1,72 @@
 ---
 import Base from '../layouts/Base.astro';
-import PageIntro from '../components/PageIntro.astro';
 import Hire from '../components/Hire.astro';
-import CodeTyper from '../components/islands/CodeTyper';
-import { elastik, projects, clientSites } from '../data/site';
+import ProjectGrid from '../components/islands/ProjectGrid';
+import { site, elastik, moreProjects } from '../data/site';
 const nodes = [
-  { t: 'WhatsApp Business', s: 'OAuth, templates, webhooks', x: '6%', y: '10%' },
-  { t: 'QuickBooks Online', s: 'OAuth2, ETL, scheduled sync', x: '62%', y: '10%' },
-  { t: 'elastik-medik', s: 'Clinical workflows', x: '2%', y: '44%' },
-  { t: 'AI Reports', s: 'FastAPI, SSO', x: '70%', y: '44%' },
-  { t: 'Print Engine V2', s: '40+ templates into one', x: '8%', y: '78%' },
-  { t: 'Serial Numbers', s: '150+ files, stock flows', x: '64%', y: '78%' },
+  { t: 'WhatsApp Business', s: 'OAuth, templates, webhooks', pos: 'left:8%;top:12%' },
+  { t: 'QuickBooks Online', s: 'OAuth2, ETL, scheduled sync', pos: 'right:7%;top:12%' },
+  { t: 'elastik-medik', s: 'Clinical workflows', pos: 'left:3%;top:45%' },
+  { t: 'AI Reports', s: 'FastAPI, SSO, sole author', pos: 'right:3%;top:45%' },
+  { t: 'Print Engine V2', s: '40+ templates into one', pos: 'left:9%;bottom:12%' },
+  { t: 'Serial Numbers', s: '150+ files, stock flows', pos: 'right:8%;bottom:12%' },
 ];
-const own = projects.filter((p) => p.where === 'My product');
-const clients = projects.filter((p) => p.where.startsWith('Client'));
 ---
 <Base title="Software" active="software" description="Software by Oluwaferanmi Iyiola: contributions to the Elastik ERP at VGR Solutions, his own products AmyNav, Tailor on the Go and PropertyTrack, and client builds.">
-  <PageIntro title="Software" lead="Systems real businesses run on. PHP and Python at the core, React and Astro on top.">
-    <div class="mt-7 flex flex-wrap gap-2" data-stagger>
-      {['PHP', 'Python, FastAPI', 'MySQL', 'React, Astro', 'WordPress', 'Socket.IO'].map((c) => <span class="chip">{c}</span>)}
+  <!-- HERO with the integration map -->
+  <section style="padding:150px 0 72px" class="max-[900px]:!pb-12 max-[900px]:!pt-24">
+    <div class="wrap grid items-center gap-12 lg:grid-cols-[minmax(0,.9fr)_minmax(0,1.1fr)]">
+      <div data-stagger>
+        <h1 class="display m-0" style="font-size:clamp(44px,5vw,72px);line-height:1.03">Software</h1>
+        <p class="lead max-w-[500px] text-lg">Systems real businesses run on. PHP and Python at the core, React and Astro on top.</p>
+        <div class="mt-7 flex flex-wrap gap-2">{['PHP', 'Python, FastAPI', 'C#, .NET', 'PostgreSQL, MySQL', 'React, Astro', 'WordPress', 'Socket.IO', 'Docker'].map((c) => <span class="chip">{c}</span>)}</div>
+      </div>
+      <div class="relative hidden h-[500px] overflow-hidden rounded-[18px] lg:block" style="background:var(--ash)" data-reveal="right">
+        <svg width="100%" height="100%" viewBox="0 0 700 500" preserveAspectRatio="none" class="absolute inset-0" aria-hidden="true">
+          <g stroke="var(--muted)" stroke-opacity=".45" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><path d="M350 250 L140 90"/><path d="M350 250 L560 90"/><path d="M350 250 L110 250"/><path d="M350 250 L590 250"/><path d="M350 250 L150 410"/><path d="M350 250 L550 410"/></g>
+        </svg>
+        <div class="ui absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl px-6 py-5 text-center text-sm text-white" style="background:#131d27">Integration Management<div class="mt-0.5 text-xs font-normal opacity-60">Shipped in 7 apps</div></div>
+        {nodes.map((n) => <div class="ui absolute whitespace-nowrap rounded-2xl px-[18px] py-3.5 text-sm" style={`${n.pos};background:var(--surface);box-shadow:var(--shadow)`}>{n.t}<div class="mt-0.5 text-xs font-normal muted">{n.s}</div></div>)}
+      </div>
     </div>
-  </PageIntro>
+  </section>
 
+  <!-- FLAGSHIP -->
   <section id="elastik" class="section studio" style="background:#131d27;color:#fff">
     <div class="wrap">
-      <div class="grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <div data-reveal="left">
-          <div class="ui text-sm" style="color:rgba(255,255,255,.55)">Sep 2023 to now · VGR Solutions, Port Louis</div>
-          <h2 class="h2 mt-2">Elastik, the ERP I contribute to</h2>
-          <p class="mt-4 text-[17px] leading-relaxed" style="color:rgba(255,255,255,.72)">Elastik is VGR Solutions' multi tenant ERP, CRM and CMS, built long before I joined. Across 12+ repositories and 1,000+ tickets, I have been trusted with features that cut across the whole product.</p>
-        </div>
-        <div class="relative hidden h-[420px] overflow-hidden rounded-[18px] lg:block" style="background:rgba(255,255,255,.04)" data-reveal="right">
-          <svg width="100%" height="100%" viewBox="0 0 700 420" preserveAspectRatio="none" class="absolute inset-0" aria-hidden="true">
-            <g stroke="rgba(255,255,255,.2)" stroke-width="1.5" fill="none" stroke-dasharray="4 6"><path d="M350 210 L140 70"/><path d="M350 210 L560 70"/><path d="M350 210 L100 210"/><path d="M350 210 L600 210"/><path d="M350 210 L150 350"/><path d="M350 210 L550 350"/></g>
-          </svg>
-          <div class="ui absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl px-6 py-5 text-center text-[15px]" style="background:var(--accent)">Integration Management<div class="mt-0.5 text-xs font-normal opacity-80">Shipped in 7 apps</div></div>
-          {nodes.map((n) => <div class="ui absolute rounded-2xl px-4 py-3 text-sm" style={`left:${n.x};top:${n.y};background:#1f2a36`}>{n.t}<div class="text-xs font-normal opacity-60">{n.s}</div></div>)}
-        </div>
+      <div data-stagger>
+        <div class="ui text-sm" style="color:rgba(255,255,255,.55)">Sep 2023 to now · VGR Solutions, Port Louis</div>
+        <h2 class="h2 mt-2.5">Elastik, the ERP I work on at VGR Solutions</h2>
+        <p class="m-0 mt-4 max-w-[760px] text-[17px] leading-relaxed" style="color:rgba(255,255,255,.72)">Elastik is VGR Solutions' multi tenant ERP, CRM and CMS, built long before I joined. I am one of its heaviest contributors across 12+ repositories and 1,000+ tickets, trusted with features that cut across the whole product.</p>
       </div>
       <div class="mt-12 grid gap-5 md:grid-cols-2" data-stagger>
         {elastik.map((f) => (
-          <div class="rounded-[18px] p-7" style="background:rgba(255,255,255,.05)">
+          <div class="rounded-[18px] p-[30px]" style="background:rgba(255,255,255,.05)">
             <div class="display text-2xl">{f.t}</div>
             <p class="m-0 mt-2.5 text-[15px] leading-relaxed" style="color:rgba(255,255,255,.68)">{f.d}</p>
           </div>
         ))}
       </div>
-      <div class="mt-6 grid items-center gap-8 rounded-[18px] p-7 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]" style="background:rgba(31,111,209,.16)" data-reveal>
+      <div class="mt-7 flex items-start gap-[18px] rounded-[18px] px-[30px] py-7" style="background:rgba(31,111,209,.16)" data-reveal>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#8bb8f0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 flex-none" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
         <div>
           <div class="ui text-base">From the field: a production bug, traced to the root</div>
-          <p class="m-0 mt-2 text-[15px] leading-relaxed" style="color:rgba(255,255,255,.72)">Tenants could finish WhatsApp onboarding while their credentials silently failed to save. I tested my first theory against real production SQL, dropped it when the data disagreed, found a non atomic dual database commit, then shipped a live fix and a transactional repair script.</p>
+          <p class="m-0 mt-2 max-w-[900px] text-[15px] leading-relaxed" style="color:rgba(255,255,255,.72)">Tenants could finish WhatsApp onboarding while their credentials silently failed to save. I tested my first theory against real production SQL, dropped it when the data disagreed, found a non atomic dual database commit, then shipped a live fix and a transactional repair script.</p>
         </div>
-        <CodeTyper client:visible />
       </div>
     </div>
   </section>
 
+  <!-- MORE PROJECTS with filter chips -->
   <section id="products" class="section">
-    <div class="wrap">
-      <h2 class="h2" data-reveal>Built by me</h2>
-      <div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-4" data-stagger>
-        {own.map((p) => (
-          <article class="card flex min-h-[240px] flex-col gap-3 p-7">
-            <span class="ui text-xs" style="color:var(--accent)">{p.where}</span>
-            <h3 class="display m-0 text-[26px] leading-tight">{p.t}</h3>
-            <p class="m-0 flex-1 text-[15px] leading-relaxed" style="color:var(--text)">{p.d}</p>
-            <span class="ui text-[13px]">{p.stack}</span>
-          </article>
-        ))}
-      </div>
-    </div>
+    <div class="wrap" data-reveal><ProjectGrid client:visible projects={moreProjects} /></div>
   </section>
+  <div id="clients"></div>
 
-  <section id="clients" class="section" style="background:var(--surface)">
-    <div class="wrap">
-      <h2 class="h2" data-reveal>Clients</h2>
-      <div class="mt-8 grid gap-5 md:grid-cols-2" data-stagger>
-        {clients.map((p) => (
-          <article class="flex flex-col gap-3 rounded-[18px] p-7" style="background:var(--bg)">
-            <span class="ui muted text-xs">{p.where}</span>
-            <h3 class="display m-0 text-[26px]">{p.t}</h3>
-            <p class="m-0 text-[15px] leading-relaxed" style="color:var(--text)">{p.d}</p>
-            <span class="ui text-[13px]">{p.stack}</span>
-          </article>
-        ))}
-      </div>
-      <p class="lead mt-8" data-reveal>Through my agency, thegossipears, since 2017: {clientSites.join(', ')} and more, for clients in Nigeria, the UK, the USA and India.</p>
+  <section class="studio" style="background:#131d27;color:#fff;padding:72px 0">
+    <div class="wrap flex flex-wrap items-center justify-between gap-6" data-reveal>
+      <h2 class="display m-0 text-[40px] leading-tight max-[900px]:text-[30px]">Need software you can trust?</h2>
+      <div class="flex flex-wrap gap-3"><a class="btn btn-primary" href={`mailto:${site.email}`}>Email me</a><a class="btn btn-glass" href="/about/#cv">Software CV</a></div>
     </div>
   </section>
-  <Hire />
 </Base>

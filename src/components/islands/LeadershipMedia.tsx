@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 type V = { t: string; when: string; img: string; src: string };
 
 /** Photos that crossfade, with a play button that opens a video pop-up. */
-export default function LeadershipMedia({ videos, label = '3 clips · speeches and an interview' }: { videos: V[]; label?: string }) {
+export default function LeadershipMedia({ videos, label = '3 clips · speeches and an interview', modalOnly = false }: { videos: V[]; label?: string; modalOnly?: boolean }) {
   const [open, setOpen] = useState(-1);
   const close = useRef<HTMLButtonElement>(null);
   useEffect(() => {
@@ -15,14 +15,14 @@ export default function LeadershipMedia({ videos, label = '3 clips · speeches a
     return () => { document.removeEventListener('keydown', k); document.body.style.overflow = ''; };
   }, [open]);
   useEffect(() => {
-    const o = () => setOpen(0);
+    const o = (e: Event) => setOpen(Number((e as CustomEvent).detail ?? 0) || 0);
     window.addEventListener('open-videos', o);
     return () => window.removeEventListener('open-videos', o);
   }, []);
   const v = videos[Math.max(0, open)];
   return (
     <>
-      <div className="sk sk-done relative overflow-hidden rounded-[18px]" style={{ aspectRatio: '4 / 3' }}>
+      {!modalOnly && <div className="sk sk-done relative overflow-hidden rounded-[18px]" style={{ aspectRatio: '4 / 3' }}>
         {videos.map((x, i) => (
           <img key={x.img} src={`${x.img}-800.webp`} srcSet={`${x.img}-800.webp 800w, ${x.img}-1400.webp 1400w`} sizes="(max-width: 900px) 100vw, 50vw" alt={x.t} loading="lazy"
             className="loaded absolute inset-0 h-full w-full object-cover" style={{ animation: 'crossfade 12s infinite', animationDelay: `${-i * 4}s` }} />
@@ -33,7 +33,7 @@ export default function LeadershipMedia({ videos, label = '3 clips · speeches a
           <svg width="26" height="26" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
         </button>
         <span className="ui absolute bottom-4 left-4 rounded-full px-3.5 py-2 text-[13px] text-white" style={{ background: 'rgba(19,29,39,.75)' }}>{label}</span>
-      </div>
+      </div>}
 
       {open >= 0 && (
         <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6" style={{ background: 'rgba(10,10,14,.82)', backdropFilter: 'blur(8px)' }} onClick={(e) => { if (e.target === e.currentTarget) setOpen(-1); }}>

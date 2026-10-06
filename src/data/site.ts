@@ -27,13 +27,13 @@ export const nav = [
 
 /** Hero chips, positioned in percent of the portrait so they orbit the face. */
 export const heroChips = [
-  { t: 'IEEE ICCCNT 2023', x: 4, y: 30, depth: 40, dot: '#4c8de6' },
-  { t: '700+ scholars led', x: 14, y: 15, depth: 60, dot: '#f4f1ea' },
-  { t: 'First Division, DTU', x: 97, y: 12, depth: 70, dot: '#3ccf8e' },
-  { t: 'Raspberry Pi robotics', x: 99, y: 42, depth: 30, dot: '#4c8de6' },
-  { t: '6 years remote with Peda', x: 96, y: 64, depth: 55, dot: '#f4f1ea' },
-  { t: 'WhatsApp across 12+ repos', x: 52, y: 86, depth: 28, dot: '#3ccf8e' },
-  { t: 'Guitarist · Oluorun', x: 4, y: 70, depth: 45, dot: '#4c8de6' },
+  { t: 'IEEE ICCCNT 2023', x: 4, y: 26, depth: 40, dot: '#4c8de6' },
+  { t: '700+ scholars led', x: 14, y: 13, depth: 60, dot: '#f4f1ea' },
+  { t: 'First Division, DTU', x: 97, y: 10, depth: 70, dot: '#3ccf8e' },
+  { t: 'Raspberry Pi robotics', x: 99, y: 34, depth: 30, dot: '#4c8de6' },
+  { t: '6 years remote with Peda', x: 97, y: 52, depth: 55, dot: '#f4f1ea' },
+  { t: 'WhatsApp across 12+ repos', x: 50, y: 66, depth: 28, dot: '#3ccf8e' },
+  { t: 'Guitarist · Oluorun', x: 4, y: 50, depth: 45, dot: '#4c8de6' },
 ];
 
 export const builds = [
@@ -129,3 +129,18 @@ export const toolkit = {
   software: ['Python', 'C++', 'C', 'C#', '.NET', 'PHP', 'React', 'Astro', 'FastAPI', 'PostgreSQL', 'MySQL', 'REST APIs'],
   platform: ['Linux', 'Docker', 'Git', 'GitHub', 'WordPress', 'Socket.IO'],
 };
+
+/** The "More projects" grid on the Software page, filterable by kind. */
+export const moreProjects = [
+  { kind: 'Product', meta: 'Amyola Limited', t: 'AmyNav', d: 'WhatsApp native commerce. Payments across 4 gateways straight to the merchant, a rule based assistant that never invents a price, delivery and team tools, a reseller API.', stack: 'React · TypeScript · PHP' },
+  { kind: 'Product', meta: 'Independent', t: 'Tailor on the Go', d: 'api-tog: a multi tenant backend for bespoke tailoring with Paystack subscriptions, tenant isolation and a sandbox to live deploy pipeline.', stack: 'PHP · Paystack' },
+  { kind: 'Product', meta: 'Independent', t: 'PropertyTrack', d: 'Property management software built on a stricter typed, interface based architecture.', stack: 'PHP · DI' },
+  { kind: 'Product', meta: '[WHO IT WAS FOR]', t: 'Xidok', d: '[ONE LINE: WHAT XIDOK IS AND WHAT YOU BUILT]', stack: '[STACK]' },
+  { kind: 'Platform', meta: 'Peda Entertainment · 6 years', t: 'Peda reading and store platform', d: 'Web developer and manager for their WordPress store and reading platform, now leading its rebuild on React and Astro.', stack: 'WordPress · React · Astro' },
+  { kind: 'Platform', meta: 'Elastik', t: 'elastik-medik', d: 'Doctor and patient dashboards, studio management, appointments and emergency case workflows.', stack: 'PHP · MySQL' },
+  { kind: 'Client', meta: 'thegossipears', t: 'Rawbloom', d: 'WooCommerce skincare store with multi currency checkout.', stack: 'WordPress · WooCommerce' },
+  { kind: 'Client', meta: 'thegossipears', t: 'Peda Video', d: 'A video site made to promote Chayomo comics.', stack: 'WordPress' },
+  { kind: 'Client', meta: 'thegossipears', t: 'IHVN-IRCE', d: '[ONE LINE ABOUT THIS BUILD]', stack: '[STACK]' },
+  { kind: 'Client', meta: 'thegossipears · since 2017', t: 'More client builds', d: 'ComicsDI, Futaku Studios, The Light Home Care, Nuskillz Legacy, Posh Wurld and Kaf Missions, for clients in Nigeria, the UK, the USA and India.', stack: 'WordPress · PHP · SEO' },
+  { kind: 'Study', meta: 'DTU coursework', t: 'Internet radio station', d: 'Set up an Icecast server from scratch with a source encoder and an HTML5 player site.', stack: 'Icecast · PHP · HTML5' },
+];

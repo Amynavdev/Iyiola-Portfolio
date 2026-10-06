@@ -11,10 +11,10 @@ const steps = [
   { when: '2022 to 2023', t: 'President', d: 'Ran welfare and coordination for 700+ scholars from 35+ countries.' },
 ];
 const record = [
-  { img: '/images/summit', t: 'Summit 1.0 and Orientation', when: '27 Jan 2023 · BR Auditorium, DTU', d: 'Theme: Embracing International Cultural Diversity.' },
-  { img: '/images/interview', t: 'Interview as President, DTU-ISS 22 to 23', when: 'DTU Studio', d: '' },
-  { img: '/images/iccr', t: 'Honoured at the ICCR Exit Engagement Evening', when: '12 Jun 2023 · University of Delhi', d: '' },
-  { img: '/images/vice-chancellor', t: 'Meeting the Vice Chancellor', when: 'Delhi Technological University', d: '' },
+  { img: '/images/summit', t: 'Summit 1.0 and Orientation', when: '27 Jan 2023 · BR Auditorium, DTU', d: 'Theme: Embracing International Cultural Diversity.', video: 2 },
+  { img: '/images/interview', t: 'Interview as President, DTU-ISS 22 to 23', when: 'DTU Studio', d: '', video: 1 },
+  { img: '/images/iccr', t: 'Speech and honour at the ICCR Exit Engagement Evening', when: '12 Jun 2023 · University of Delhi', d: '', video: 0 },
+  { img: '/images/vice-chancellor', t: 'Meeting the Vice Chancellor', when: 'Delhi Technological University', d: '', video: -1 },
 ];
 ---
 <Base title="Leadership" active="leadership" description="Oluwaferanmi Iyiola co founded the DTU International Students' Society in 2021, wrote its constitution and led 700+ scholars from 35+ countries as President.">
@@ -33,7 +33,7 @@ const record = [
         <div class="ui muted text-sm">Delhi Technological University</div>
         <h2 class="h2 mt-2">DTU International Students' Society</h2>
         <p class="lead">A home for 700+ international scholars from 35+ countries. I helped found it, wrote its constitution, then led it.</p>
-        <div class="mt-7"><LeadershipMedia client:visible videos={leadership.videos} /></div>
+        <Pic src="/images/speech" widths={[800, 1400]} alt="Speaking as President of DTU-ISS" class="mt-7 rounded-[18px]" style="aspect-ratio:4/3" />
       </div>
       <ol class="m-0 list-none p-0" data-stagger>
         {steps.map((s, i) => (
@@ -52,13 +52,19 @@ const record = [
       <div class="mt-10 grid gap-5 md:grid-cols-2" data-stagger>
         {record.map((r) => (
           <article class="overflow-hidden rounded-[18px]" style="background:rgba(255,255,255,.05)">
-            <Pic src={r.img} widths={[800, 1400]} alt={r.t} style="aspect-ratio:16/9" imgStyle="object-position:center 30%" />
+            <div class="relative">
+              <Pic src={r.img} widths={[800, 1400]} alt={r.t} style="aspect-ratio:16/9" imgStyle="object-position:center 30%" />
+              {r.video >= 0 && <button type="button" aria-label={`Play ${r.t}`} data-video={r.video} class="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border-0" style="background:rgba(255,255,255,.92)"><svg width="22" height="22" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></button>}
+            </div>
             <div class="px-6 py-5"><div class="ui text-[13px]" style="color:rgba(255,255,255,.55)">{r.when}</div><h3 class="display m-0 mt-1 text-2xl">{r.t}</h3>{r.d && <p class="m-0 mt-1 text-[15px]" style="color:rgba(255,255,255,.7)">{r.d}</p>}</div>
           </article>
         ))}
       </div>
-      <button type="button" class="btn btn-paper mt-8" onclick="window.dispatchEvent(new Event('open-videos'))">Watch speeches and interview</button>
+      <LeadershipMedia client:idle videos={leadership.videos} modalOnly />
     </div>
   </section>
   <Hire />
 </Base>
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-video]').forEach((b) => b.addEventListener('click', () => window.dispatchEvent(new CustomEvent('open-videos', { detail: Number(b.dataset.video) }))));
+</script>

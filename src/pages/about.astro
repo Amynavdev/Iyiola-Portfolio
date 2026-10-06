@@ -8,7 +8,10 @@ import { site, cvs, certificates, toolkit } from '../data/site';
 <Base title="About" active="about" description="About Oluwaferanmi Iyiola: electronics engineer (DTU, First Division) and full stack developer in Port Louis, Mauritius.">
   <section style="padding:140px 0 64px" class="max-[900px]:!pt-24">
     <div class="wrap grid items-center gap-16 lg:grid-cols-[minmax(0,.85fr)_minmax(0,1.15fr)] max-[900px]:gap-8">
-      <div data-reveal="left"><Pic src="/images/portrait-cutout-1000" plain alt="Portrait of Oluwaferanmi Iyiola" class="rounded-[22px]" style="background:var(--surface);box-shadow:var(--shadow);aspect-ratio:1000/1124" imgClass="!object-contain" eager /></div>
+      <div data-reveal="left" class="relative">
+        <span aria-hidden="true" class="absolute bottom-0 left-1/2 aspect-square w-[86%] -translate-x-1/2 rounded-full" style="background:var(--accent-soft)"></span>
+        <img src="/images/portrait-cutout-1000.webp" alt="Portrait of Oluwaferanmi Iyiola" width="1000" height="1124" loading="eager" class="relative block h-auto w-full" style="-webkit-mask-image:linear-gradient(to bottom,#000 88%,transparent);mask-image:linear-gradient(to bottom,#000 88%,transparent)" />
+      </div>
       <div data-stagger>
         <h1 class="display m-0" style="font-size:clamp(40px,4.6vw,64px);line-height:1.05">{site.fullName}</h1>
         <div class="ui muted mt-2.5 text-[15px]">Electronics engineer · Software engineer · Backend and system architecture · Port Louis</div>

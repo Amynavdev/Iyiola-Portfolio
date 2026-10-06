@@ -2,32 +2,79 @@
 import Base from '../layouts/Base.astro';
 import Pic from '../components/Pic.astro';
 import { site } from '../data/site';
-const bars = Array.from({ length: 60 }, (_, i) => ({ h: 18 + Math.round(Math.abs(Math.sin(i * 0.55) * 26 + Math.sin(i * 1.7) * 12)), on: i < 22, dur: (0.9 + (i % 5) * 0.17).toFixed(2), del: (-(i % 7) * 0.13).toFixed(2) }));
+const bars = Array.from({ length: 60 }, (_, i) => ({ h: Math.min(56, 18 + Math.round(Math.abs(Math.sin(i * 0.55) * 26 + Math.sin(i * 1.7) * 12))), on: i < 22, dur: (0.9 + (i % 5) * 0.17).toFixed(2), del: (-(i % 7) * 0.13).toFixed(2) }));
+const gigs = [
+  { when: 'DTU · featured by DTU Times', t: 'Live on electric guitar', img: '/images/guitar' },
+  { when: '[DATE · VENUE]', t: '[EVENT NAME]' },
+  { when: '[DATE · VENUE]', t: '[EVENT NAME]' },
+];
+const tracks = [
+  { t: 'Oluorun (God of Heaven)', y: '[YEAR]', href: site.links.audiomack },
+  { t: '[TRACK]', y: '[YEAR]' },
+  { t: '[TRACK]', y: '[YEAR]' },
+];
 ---
 <Base title="Music" active="music" tone="dark" description="Oluwaferanmi Iyiola plays electric guitar. His single Oluorun (God of Heaven) is out on Audiomack as iyiolastrings.">
-  <section class="studio" style="background:#17161c;color:#fff;padding:150px 0 80px">
+  <section class="studio" style="background:#17161c;color:#fff;padding:150px 0 90px">
     <div class="wrap grid items-center gap-14 lg:grid-cols-2 max-[900px]:gap-8">
-      <div data-reveal="left">
-        <h1 class="display m-0" style="font-size:clamp(42px,5vw,72px);line-height:1.03">Music</h1>
-        <p class="mt-4 max-w-[520px] text-lg leading-relaxed" style="color:rgba(255,255,255,.72)">Guitarist. My single Oluorun, God of Heaven, is out now.</p>
-        <div class="mt-8 rounded-[22px] p-7" style="background:rgba(255,255,255,.05)">
-          <div class="flex items-center gap-5">
-            <div class="ui flex h-28 w-28 flex-none items-center justify-center rounded-[14px] text-center text-[11px]" style="background:#2c2b33;color:rgba(255,255,255,.45)">[OLUORUN COVER]</div>
-            <div><div class="ui text-[13px]" style="color:rgba(255,255,255,.55)">Single · iyiolastrings</div><div class="display text-[34px] leading-tight">Oluorun</div><div class="text-sm" style="color:rgba(255,255,255,.6)">God of Heaven</div></div>
-          </div>
-          <div class="mt-6 flex items-center gap-4">
-            <a href={site.links.audiomack} aria-label="Play Oluorun on Audiomack" class="flex h-14 w-14 flex-none items-center justify-center rounded-full" style="background:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></a>
-            <div class="flex h-14 min-w-0 flex-1 items-center gap-[3px] overflow-hidden" aria-hidden="true">
-              {bars.map((b) => <span class="min-w-[2px] flex-1 rounded-sm" style={`height:${Math.min(b.h, 56)}px;background:${b.on ? '#fff' : 'rgba(255,255,255,.25)'};animation:bar ${b.dur}s ease-in-out infinite;animation-delay:${b.del}s`} />)}
-            </div>
-          </div>
-          <a class="btn mt-6" style="background:#fff;color:#131d27" href={site.links.audiomack}>Listen on Audiomack</a>
+      <div data-stagger>
+        <h1 class="display m-0" style="font-size:clamp(44px,5vw,72px);line-height:1.03">Music</h1>
+        <p class="m-0 mt-[18px] max-w-[520px] text-lg leading-relaxed" style="color:rgba(255,255,255,.72)">Guitarist. My single Oluorun, God of Heaven, is out now.</p>
+        <div class="mt-[30px] flex flex-wrap gap-3">
+          <a class="btn btn-primary" href={site.links.audiomack}>Play Oluorun</a>
+          <a class="btn btn-glass" href={`mailto:${site.email}?subject=Booking`}>Book me</a>
         </div>
       </div>
-      <div data-reveal="right">
-        <Pic src="/images/guitar" widths={[400, 1000]} alt="Playing electric guitar on stage, featured by DTU Times" class="rounded-[22px]" style="aspect-ratio:1080/890" eager />
-        <div class="ui mt-3 text-[13px]" style="color:rgba(255,255,255,.5)">Live on electric guitar · photo by DTU Times</div>
+
+      <div class="rounded-[22px] p-[30px] max-[900px]:p-5" style="background:rgba(255,255,255,.05)" data-reveal="right">
+        <div class="flex items-center gap-[22px]">
+          <div class="ui flex h-[132px] w-[132px] flex-none items-center justify-center rounded-[14px] text-center text-xs max-[900px]:h-24 max-[900px]:w-24" style="background:#2c2b33;color:rgba(255,255,255,.45)">[OLUORUN COVER]</div>
+          <div class="min-w-0">
+            <div class="ui text-[13px]" style="color:rgba(255,255,255,.55)">Latest release · [YEAR]</div>
+            <div class="display mt-1 text-[30px] leading-tight">Oluorun</div>
+            <div class="mt-0.5 text-sm" style="color:rgba(255,255,255,.6)">iyiolastrings · God of Heaven</div>
+          </div>
+        </div>
+        <div class="mt-7 flex items-center gap-[18px]">
+          <a href={site.links.audiomack} aria-label="Play Oluorun on Audiomack" class="flex h-14 w-14 flex-none items-center justify-center rounded-full" style="background:#fff"><svg width="22" height="22" viewBox="0 0 24 24" fill="#131d27" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></a>
+          <div class="flex h-14 min-w-0 flex-1 items-center gap-[3px] overflow-hidden" aria-hidden="true">
+            {bars.map((b) => <span class="min-w-[2px] flex-1 rounded-sm" style={`height:${b.h}px;background:${b.on ? '#fff' : 'rgba(255,255,255,.25)'};animation:bar ${b.dur}s ease-in-out infinite;animation-delay:${b.del}s`} />)}
+          </div>
+        </div>
+        <div class="mt-6 flex flex-wrap gap-2">
+          <a class="btn min-h-10 px-4 text-[13px]" style="background:#fff;color:#131d27" href={site.links.audiomack}>Audiomack</a>
+          <span class="ui inline-flex min-h-10 items-center rounded-full px-4 text-[13px]" style="background:rgba(255,255,255,.08);color:rgba(255,255,255,.55)">[SPOTIFY, APPLE MUSIC, YOUTUBE LINKS]</span>
+        </div>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <h2 class="h2" data-reveal>On stage</h2>
+      <div class="mt-9 grid gap-[22px] md:grid-cols-3" data-stagger>
+        {gigs.map((g) => (
+          <article class="card overflow-hidden">
+            {g.img ? <Pic src={g.img} widths={[400, 1000]} alt={g.t} style="aspect-ratio:4/3" /> : <div class="ui muted flex items-center justify-center text-[13px]" style="aspect-ratio:4/3;background:var(--ash)">[PERFORMANCE PHOTO OR VIDEO]</div>}
+            <div class="px-6 py-[22px]"><div class="ui muted text-[13px]">{g.when}</div><h3 class="display m-0 mt-1 text-[23px]">{g.t}</h3></div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--surface)">
+    <div class="wrap grid gap-14 lg:grid-cols-2">
+      <h2 class="h2" data-reveal>Discography</h2>
+      <ol class="m-0 list-none p-0" data-stagger>
+        {tracks.map((t, i) => (
+          <li class="flex items-center gap-[18px] border-b py-[18px]" style="border-color:var(--line)">
+            <span class="ui w-6 text-[13px] muted">{String(i + 1).padStart(2, '0')}</span>
+            {t.href ? <a href={t.href} class="ui flex-1 text-base no-underline" style="color:var(--ink)">{t.t}</a> : <span class="ui flex-1 text-base">{t.t}</span>}
+            <span class="ui muted text-[13px]">{t.y}</span>
+          </li>
+        ))}
+      </ol>
     </div>
   </section>
 </Base>

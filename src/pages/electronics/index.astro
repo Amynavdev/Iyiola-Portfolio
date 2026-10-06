@@ -1,10 +1,8 @@
 ---
 import Base from '../../layouts/Base.astro';
 import PageIntro from '../../components/PageIntro.astro';
-import Pic from '../../components/Pic.astro';
-import Hire from '../../components/Hire.astro';
 import BuildPlayer from '../../components/islands/BuildPlayer';
-import { builds, silicon, toolkit } from '../../data/site';
+import { site, builds, silicon, toolkit } from '../../data/site';
 const modules = [
   ['Ultrasonic sensor', 'Finds objects ahead and avoids obstacles'],
   ['Robotic car', 'Drives the robot to the waste'],
@@ -46,22 +44,23 @@ const modules = [
 
   <section class="section" style="background:var(--surface)">
     <div class="wrap">
-      <div class="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)]">
-        <div data-reveal="left"><Pic src="/images/eirt-thesis" widths={[700, 1200]} alt="Holding EIRT and the project thesis outside the Electronics and Communications department" class="rounded-[22px]" style="aspect-ratio:4/5" imgStyle="object-position:center 35%" /></div>
-        <div data-reveal="right">
-          <h2 class="h2">Silicon, signals and simulation</h2>
-          <div class="mt-7 grid gap-4 sm:grid-cols-2" data-stagger>
-            {silicon.map((s) => (
-              <div class="flex flex-col gap-2 rounded-[18px] p-6" style="background:var(--bg)">
-                <span class="ui muted text-[13px]">{s.tool}</span>
-                <span class="display text-[23px] leading-tight">{s.t}</span>
-                <span class="text-sm leading-relaxed" style="color:var(--text)">{s.d}</span>
-              </div>
-            ))}
+      <h2 class="h2" data-reveal>Silicon, signals and simulation</h2>
+      <div class="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" data-stagger>
+        {silicon.map((s) => (
+          <div class="flex flex-col gap-2.5 rounded-[18px] p-[26px]" style="background:var(--bg)">
+            <span class="ui muted text-[13px]">{s.tool}</span>
+            <span class="display text-[23px] leading-tight">{s.t}</span>
+            <span class="text-sm leading-relaxed" style="color:var(--text)">{s.d}</span>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   </section>
-  <Hire />
+
+  <section class="studio" style="background:var(--studio);color:#fff;padding:72px 0">
+    <div class="wrap flex flex-wrap items-center justify-between gap-6" data-reveal>
+      <h2 class="display m-0 text-[40px] leading-tight max-[900px]:text-[30px]">Embedded, robotics or vision role?</h2>
+      <div class="flex flex-wrap gap-3"><a class="btn btn-primary" href={`mailto:${site.email}`}>Email me</a><a class="btn btn-glass" href="/about/#cv">Embedded CV</a></div>
+    </div>
+  </section>
 </Base>
