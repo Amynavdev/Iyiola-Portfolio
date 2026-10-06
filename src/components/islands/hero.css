@@ -28,7 +28,8 @@
   .hero-chip.desk { display: none; }
   .hero-chipbox { position: absolute; left: 0; top: 0; width: 100%; height: 520px; }
   .chips-m { display: block; }
-  .hero-chip > span { font-size: 11px; padding: 8px 12px; gap: 8px; }
+  .chips-m .hero-chip span:not(.x) { font-size: 10px; padding: 5px 9px; gap: 6px; background: rgba(20, 19, 24, 0.45); }
+  .chips-m .hero-chip i { width: 6px; height: 6px; }
   .hero-copy { height: auto; margin-top: -190px; }
   .hero-name { font-size: 44px; }
   .hero h1 { font-size: 46px; }

@@ -3,10 +3,10 @@ import './hero.css';
 
 type Chip = { t: string; x: number; y: number; depth: number; dot: string };
 const MOBILE = [
-  { t: 'IEEE ICCCNT 2023', s: { left: 12, top: 84 }, dot: '#4c8de6' },
-  { t: 'First Division, DTU', s: { right: 12, top: 118 }, dot: '#3ccf8e' },
-  { t: '700+ scholars led', s: { left: 12, top: 196 }, dot: '#f4f1ea' },
-  { t: 'Raspberry Pi robotics', s: { right: 12, top: 228 }, dot: '#4c8de6' },
+  { t: 'IEEE ICCCNT 2023', s: { left: 10, top: 80 }, dot: '#4c8de6' },
+  { t: 'First Division, DTU', s: { right: 8, top: 200 }, dot: '#3ccf8e' },
+  { t: '700+ scholars led', s: { left: 10, top: 236 }, dot: '#f4f1ea' },
+  { t: 'Raspberry Pi robotics', s: { right: 10, top: 296 }, dot: '#4c8de6' },
 ];
 const REST = { x: 0.74, y: 0.32 };
 
