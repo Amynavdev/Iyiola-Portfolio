@@ -13,7 +13,7 @@ npm run build     # astro check + static build into dist/
 - Leadership videos: set `src` on each entry in `leadership.videos` once the files are uploaded.
 - CV files: set `file` on each entry in `cvs`.
 
-## Temporary preview
 
-`.github/workflows/preview-pages.yml` publishes the branch to https://amynavdev.github.io/Iyiola-Portfolio/ using `scripts/rebase.mjs` to fit the sub path.
-Remove both, and turn off GitHub Pages in the repo settings, once the site is live on Cloudflare Pages.
+## Deploy (Cloudflare Pages)
+
+Connect this repo in Cloudflare Pages with framework preset Astro, build command `npm run build`, output folder `dist`. Node 22 comes from `.node-version`. Caching and security headers live in `public/_headers`.
