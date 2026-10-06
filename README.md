@@ -14,6 +14,6 @@ npm run build     # astro check + static build into dist/
 - CV files: set `file` on each entry in `cvs`.
 
 
-## Deploy (Cloudflare Pages)
+## Deploy (Cloudflare)
 
-Connect this repo in Cloudflare Pages with framework preset Astro, build command `npm run build`, output folder `dist`. Node 22 comes from `.node-version`. Caching and security headers live in `public/_headers`.
+Cloudflare builds the `main` branch of `Iyiola-Oluwaferanmi/Portolio` (build `npm run build`, deploy `npx wrangler deploy`). `wrangler.jsonc` serves `dist/` as static assets under the Worker name `portolio`. Node 22 comes from `.node-version`; caching and security headers live in `public/_headers`.
