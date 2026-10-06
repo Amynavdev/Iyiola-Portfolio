@@ -14,6 +14,8 @@ export const site = {
     audiomack: 'https://audiomack.com/iyiolastrings/song/oluorun',
     instagram: 'https://www.instagram.com/iyiolastrings/',
     facebook: 'https://www.facebook.com/profile.php?id=100002764082892',
+    tiktok: 'https://www.tiktok.com/@iyiolastrings',
+    x: 'https://x.com/iyiolaferanmi',
   },
 };
 
@@ -21,6 +23,8 @@ export const socials = [
   { k: 'linkedin', label: 'LinkedIn', href: site.links.linkedin },
   { k: 'github', label: 'GitHub', href: site.links.github },
   { k: 'instagram', label: 'Instagram', href: site.links.instagram },
+  { k: 'tiktok', label: 'TikTok', href: site.links.tiktok },
+  { k: 'x', label: 'X (Twitter)', href: site.links.x },
   { k: 'facebook', label: 'Facebook', href: site.links.facebook },
   { k: 'audiomack', label: 'Audiomack', href: site.links.audiomack },
 ];
