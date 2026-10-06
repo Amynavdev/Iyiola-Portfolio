@@ -13,8 +13,17 @@ export const site = {
     github: 'https://github.com/IYIOLASTRINGS',
     audiomack: 'https://audiomack.com/iyiolastrings/song/oluorun',
     instagram: 'https://www.instagram.com/iyiolastrings/',
+    facebook: 'https://www.facebook.com/profile.php?id=100002764082892',
   },
 };
+
+export const socials = [
+  { k: 'linkedin', label: 'LinkedIn', href: site.links.linkedin },
+  { k: 'github', label: 'GitHub', href: site.links.github },
+  { k: 'instagram', label: 'Instagram', href: site.links.instagram },
+  { k: 'facebook', label: 'Facebook', href: site.links.facebook },
+  { k: 'audiomack', label: 'Audiomack', href: site.links.audiomack },
+];
 
 export const nav = [
   { href: '/about/', label: 'About', key: 'about' },

@@ -1,6 +1,7 @@
 ---
 // No backend yet: the form composes an email in the visitor's own mail app, and says so.
 import { site } from '../data/site';
+import Socials from './Socials.astro';
 ---
 <section id="contact-form" class="section">
   <div class="wrap grid gap-12 lg:grid-cols-[minmax(0,.8fr)_minmax(0,1.2fr)]">
@@ -8,6 +9,7 @@ import { site } from '../data/site';
       <h2 class="h2">Write to me.</h2>
       <p class="lead">A role, a project, a stage or a cause. I reply within a day.</p>
       <div class="ui muted mt-6 text-sm">Or email <a href={`mailto:${site.email}`} style="color:var(--accent)">{site.email}</a></div>
+      <Socials class="mt-4" />
     </div>
     <form class="card grid gap-4 p-8 max-[900px]:p-5" data-reveal="right" data-mailto={site.email} novalidate>
       <div class="grid gap-4 sm:grid-cols-2">

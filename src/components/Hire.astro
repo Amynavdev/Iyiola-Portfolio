@@ -1,5 +1,6 @@
 ---
 import { site } from '../data/site';
+import Socials from './Socials.astro';
 ---
 <section id="contact" class="studio" style="background:#131d27;color:#fff;padding:96px 0 96px">
   <div class="wrap" data-stagger>
@@ -9,8 +10,8 @@ import { site } from '../data/site';
       <a class="btn btn-primary" href={`mailto:${site.email}`}>Email me</a>
       <a class="btn btn-glass" href="/about/#cv">Embedded CV</a>
       <a class="btn btn-glass" href="/about/#cv">Software CV</a>
-      <a class="btn btn-glass" href={site.links.linkedin} rel="me">LinkedIn</a>
-      <a class="btn btn-glass" href={site.links.github} rel="me">GitHub</a>
     </div>
+    <div class="ui mt-9 text-[13px]" style="color:rgba(255,255,255,.55)">Or find me on</div>
+    <Socials tone="dark" class="mt-3" />
   </div>
 </section>

@@ -1,5 +1,6 @@
 ---
 import { nav, site } from '../data/site';
+import Socials from './Socials.astro';
 ---
 <footer class="site-footer">
   <div class="wrap flex flex-wrap items-center justify-between gap-5 py-7">
@@ -10,11 +11,7 @@ import { nav, site } from '../data/site';
     <nav aria-label="Footer" class="flex flex-wrap gap-x-5 gap-y-2">
       {nav.map((n) => <a href={n.href} class="ui text-[13px] no-underline" style="color:var(--muted)">{n.label}</a>)}
     </nav>
-    <div class="flex items-center gap-4">
-      <a href={site.links.linkedin} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">LinkedIn</a>
-      <a href={site.links.github} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">GitHub</a>
-      <a href={site.links.audiomack} rel="me" class="ui text-[13px] no-underline" style="color:var(--muted)">Audiomack</a>
-    </div>
+    <Socials />
   </div>
   <div class="wrap ui pb-7 text-xs max-[1000px]:pb-28" style="color:var(--muted)">© {new Date().getFullYear()} {site.fullName} · {site.location}</div>
 </footer>
